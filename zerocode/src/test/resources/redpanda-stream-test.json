@@ -1,0 +1,44 @@
+{
+  "scenarioName": "redpanda stream test example",
+  "steps": [
+    {
+      "name": "produce_test_message",
+      "url": "kafka-topic:test-topic",
+      "method": "produce",
+      "request": {
+        "recordType": "JSON",
+        "records": [
+          {
+            "key": "${RANDOM.NUMBER}",
+            "value": {
+              "testValue": "Hello Redpanda"
+            }
+          }
+        ]
+      },
+      "assertions": {
+        "status": "Ok"
+      }
+    },
+    {
+      "name": "consume_test_message",
+      "url": "kafka-topic:test-topic",
+      "method": "consume",
+      "request": {
+        "consumerLocalConfigs": {
+          "recordType": "JSON"
+        }
+      },
+      "retry": {
+        "max": 2,
+        "delay": 30
+      },
+      "validators": [
+        {
+          "field": "records[0].value.testValue",
+          "value": "Hello Redpanda"
+        }
+      ]
+    }
+  ]
+}
