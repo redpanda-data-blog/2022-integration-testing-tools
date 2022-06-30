@@ -36,7 +36,7 @@ public class RedpandaTestcontainerTest {
 
     @Before
     public void init() {
-        redpanda = new RedpandaContainer();
+        redpanda = new RedpandaContainer("vectorized/redpanda:v22.1.3");
         redpanda.start();
     }
 
@@ -112,8 +112,8 @@ public class RedpandaTestcontainerTest {
 
         private static final String STARTER_SCRIPT = "/testcontainers_start.sh";
 
-        public RedpandaContainer() {
-            super("vectorized/redpanda:v22.1.3");
+        public RedpandaContainer(String image) {
+            super(image);
 
             withExposedPorts(9092);
             withCreateContainerCmdModifier(cmd -> {

@@ -10,9 +10,8 @@
         "records": [
           {
             "key": "${RANDOM.NUMBER}",
-            "value": {
-              "testValue": "Hello Redpanda"
-            }
+            "value": "Hello Redpanda"
+
           }
         ]
       },
@@ -35,7 +34,7 @@
       },
       "validators": [
         {
-          "field": "records[0].value.testValue",
+          "field": "records[0].value",
           "value": "Hello Redpanda"
         }
       ]
